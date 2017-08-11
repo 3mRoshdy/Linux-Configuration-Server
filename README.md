@@ -28,19 +28,20 @@ This Project Requires :
     Enter location for the key to be aquired.
     Navigate through the directory and open the new_key_file.pub
     
-      ```
+      """
       The key was created in a default location /ubuntu/.ssh/<key_file>
       $cat /Users/panpan/.ssh/key_file.pub
-      ```
+      
+      """
       
     Copy the content of that file.
     
     3. return to the remote terminal : 
-      ```sudo vi /home/ubuntu/.ssh/authorized_keys```
+      """sudo vi /home/ubuntu/.ssh/authorized_keys"""
      paste the content of the key.
      
     4. 
-       ```sudo chmod 700 ~/.ssh
+       sudo chmod 700 ~/.ssh
        sudo chmod 644 ~/.ssh/authorized_keys```
     # Create new user "grader-udacity":
       1. Create new User: 
@@ -53,20 +54,20 @@ This Project Requires :
       sudo mkdir /home/grader/.ssh
       ```
       4.edit authorized_keys file for grader user
-      ```sudo vi /home/grader/.ssh/authorized_keys```
+      ``` sudo vi /home/grader/.ssh/authorized_keys ```
       5. Exit Ubuntu User 
-      ``` exit```
+      ``` exit ```
       6. Log in as grader-udacity
       ``` ssh grader-udacity@35.176.156.166 -i ~/.ssh/key_file ```
       7. enter password related to this user.
       
       # Give the grader user sudo access :
       1. return as ubuntu user
-      ```ssh ubuntu@35.176.156.166 -i ~/.ssh/key_file```
+      ``` ssh ubuntu@35.176.156.166 -i ~/.ssh/key_file ```
       1. edit the sudoers file for the grader user the directory for sudoers.d
-      ```sudo vi /etc/sudoers.d/grader-udacity```
+      ``` sudo vi /etc/sudoers.d/grader-udacity ```
       2. Add:
-     ```grader ALL=(ALL) NOPASSWD:ALL```
+     ``` grader ALL=(ALL) NOPASSWD:ALL ```
      No the grader can do sudo commands.
      
       3.Log in as grader:
@@ -78,6 +79,7 @@ This Project Requires :
      $sudo chmod 644 ~/.ssh/authorized_keys
      ```
      4. Change port to 2200 nad assign FireWall for server using UFW : 
+     
     ```   
     $sudo ufw status
     $sudo ufw allow ssh
@@ -87,7 +89,20 @@ This Project Requires :
     $sudo ufw allow ntp
     $sudo ufw enable
     $sudo ufw status
+     
     ```
+    5. Change port from default 22 to 2200: 
+    ``` sudo vi /etc/ssh/sshd_config ```
+    6. restart server SSH:
+    ``` sudo service ssh restart ```
+    7. go to amazon acount and set the networking and add a custom --> TCP --> Port:2200
+    8. Log in now using the new port : 
+    ``` ssh grader-udacity@35.176.156.166 -i ~/.ssh/key_file -p 2200 ```
+    
+    # Install apache : 
+     - start off by installing apache:
+      ``` $sudo apt-get install apache2 ```
+    
      
      
     
