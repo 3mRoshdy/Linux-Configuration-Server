@@ -128,30 +128,30 @@ This Project Requires :
  ```$sudo nano /etc/apache2/sites-available/catalog.conf```
   Paste:
 
-  ```
+    ```
 
-  <VirtualHost *: 80>
-     ServerName 54.210.72.218
-     ServerAlias ec2-54-210-72-218.compute-1.amazonaws.com
-     ServerAdmin admin@54.210.72.218
-     WSGIDaemonProcess catalog python-path=/var/www/catalog:/var/www/catalog/virtualenv/lib/python2.7/site-packages
-     WSGIProcessGroup catalog
-     WSGIScriptAlias / /var/www/catalog/catalog.wsgi
-     <Directory /var/www/catalog/catalog/>
-       Order allow,deny
-       Allow from all
-     </Directory>
-     Alias /static /var/www/catalog/catalog/static
-     <Directory /var/www/catalog/catalog/static/>
-       Order allow,deny
-       Allow from all
-     </Directory>
-     ErrorLog ${APACHE_LOG_DIR}/error.log
-     LogLevel warn
-     CustomLog ${APACHE_LOG_DIR}/access.log combined
-   </VirtualHost>
+    <VirtualHost *: 80>
+       ServerName 54.210.72.218
+       ServerAlias ec2-54-210-72-218.compute-1.amazonaws.com
+       ServerAdmin admin@54.210.72.218
+       WSGIDaemonProcess catalog python-path=/var/www/catalog:/var/www/catalog/virtualenv/lib/python2.7/site-packages
+       WSGIProcessGroup catalog
+       WSGIScriptAlias / /var/www/catalog/catalog.wsgi
+       <Directory /var/www/catalog/catalog/>
+         Order allow,deny
+         Allow from all
+       </Directory>
+       Alias /static /var/www/catalog/catalog/static
+       <Directory /var/www/catalog/catalog/static/>
+         Order allow,deny
+         Allow from all
+       </Directory>
+       ErrorLog ${APACHE_LOG_DIR}/error.log
+       LogLevel warn
+       CustomLog ${APACHE_LOG_DIR}/access.log combined
+     </VirtualHost>
 
-   ```
+     ```
    Enable Virtual Host : ``` $sudo a2ensite catalog ```
    Correct the files client_secrets.json in project.py
    ``` $sudo vi __init__.py ```
