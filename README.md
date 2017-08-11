@@ -182,10 +182,10 @@ This Project Requires :
           GRANT ALL ON SCHEMA public TO catalog;
           \q
     ```
-    Change engine in project.py, database_setup.py and lotsofmenus.py : 
-    ``` engine = create_engine('postgresql://catalog:password@localhost/catalog') ```
-    run database_setup.py , lotsofmenus.py .
-    # Finally : 
-    Check URL: http://35.176.156.166/
- 
+  Change engine in project.py, database_setup.py and lotsofmenus.py : 
+  ``` engine = create_engine('postgresql://catalog:password@localhost/catalog') ```
+  run database_setup.py , lotsofmenus.py .
+  # Finally : 
+  Check URL: http://35.176.156.166/
+
  
