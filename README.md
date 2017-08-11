@@ -68,7 +68,7 @@ This Project Requires :
     ``` sudo vi /etc/sudoers.d/grader-udacity ```
     2. Add:
    ``` grader ALL=(ALL) NOPASSWD:ALL ```
-   No the grader can do sudo commands.
+   --> Now the grader can do sudo commands.
 
     3.Log in as grader:
    ```      
