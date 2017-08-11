@@ -7,7 +7,6 @@ In this Project, i have configured a web server for hosting my previous web appl
 Starting off by Displaying my WebServer : 
   - Public IP Adress : http://35.176.156.166/
   - SSH PORT : 2200
-  - Application URL : http://ec2-35-176-156-166.compute-1.amazonaws.com/
 
 This Project Requires : 
   1- Starting a new Ubuntu Server with public key using LightSail
@@ -112,6 +111,81 @@ This Project Requires :
 
  Then you restart apache : 
  ```$sudo apache2ctl restart```
-     
+ # install git and get the ItemCatalog on your server:
+ install git
+ ```$sudo apt-get install git```
+ clone the Item Catalog project
+ ```mkdir /var/www/catalog
+    /var/www/catalog ```
+ # Install Flask : 
+ 1. $sudo apt-get install python-pip
+ 2. Install Flask:
+ $sudo pip install Flask
+ 
+ # install remaining dependencies : 
+ ```$sudo pip install httplib2 oauth2client sqlalchemy psycopg2 sqlalchemy_utils requests```
+ # Configure a New Virtual Host:
+ ```$sudo nano /etc/apache2/sites-available/catalog.conf```
+  Paste:
 
+  ```
 
+  <VirtualHost *: 80>
+     ServerName 54.210.72.218
+     ServerAlias ec2-54-210-72-218.compute-1.amazonaws.com
+     ServerAdmin admin@54.210.72.218
+     WSGIDaemonProcess catalog python-path=/var/www/catalog:/var/www/catalog/virtualenv/lib/python2.7/site-packages
+     WSGIProcessGroup catalog
+     WSGIScriptAlias / /var/www/catalog/catalog.wsgi
+     <Directory /var/www/catalog/catalog/>
+       Order allow,deny
+       Allow from all
+     </Directory>
+     Alias /static /var/www/catalog/catalog/static
+     <Directory /var/www/catalog/catalog/static/>
+       Order allow,deny
+       Allow from all
+     </Directory>
+     ErrorLog ${APACHE_LOG_DIR}/error.log
+     LogLevel warn
+     CustomLog ${APACHE_LOG_DIR}/access.log combined
+   </VirtualHost>
+
+   ```
+   Enable Virtual Host : ``` $sudo a2ensite catalog ```
+   Correct the files client_secrets.json in project.py
+   ``` $sudo vi __init__.py ```
+   Create catalog.wsgi File :
+   ``` $sudo vi /var/www/catalog/catalog.wsgi ```
+   paste : 
+    ```
+   import sys
+   import logging
+   logging.basicConfig(stream=sys.stderr)
+   sys.path.insert(0, "/var/www/catalog/")
+
+   from catalog import app as application
+   application.secret_key = 'super_secret_key'
+
+    ```
+    Install PostgreSQL :
+    ``` $sudo apt-get install libpq-dev python-dev
+        $sudo apt-get install postgresql postgresql-contrib
+        $sudo su - postgres
+        
+         psql
+          CREATE USER catalog WITH PASSWORD 'password';
+          ALTER USER catalog CREATEDB;
+          CREATE DATABASE catalog WITH OWNER catalog;
+          \c catalog
+          REVOKE ALL ON SCHEMA public FROM public;
+          GRANT ALL ON SCHEMA public TO catalog;
+          \q
+    ```
+    Change engine in project.py, database_setup.py and lotsofmenus.py : 
+    ``` engine = create_engine('postgresql://catalog:password@localhost/catalog') ```
+    run database_setup.py , lotsofmenus.py .
+    # Finally : 
+    Check URL: http://35.176.156.166/
+ 
+ 
