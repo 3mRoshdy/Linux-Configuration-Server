@@ -99,11 +99,19 @@ This Project Requires :
   8. Log in now using the new port : 
   ``` ssh grader-udacity@35.176.156.166 -i ~/.ssh/key_file -p 2200 ```
 
-  # Install apache : 
-   - start off by installing apache:
-    ``` $sudo apt-get install apache2 ```
+# Install apache : 
+ - start off by installing apache:
+  ``` $sudo apt-get install apache2 ```
+# Install mod_wsgi :
+ ``` $sudo apt-get install libapache2-mod-wsgi ```
+  You then need to configure Apache to handle requests using the WSGI module.
+  ```$sudo nano /etc/apache2/sites-enabled/000-default.conf ```
 
+ Add the following line at the end of the <VirtualHost * : 80> block, right before the closing </VirtualHost> line:
+ ```WSGIScriptAlias / /var/www/html/myapp.wsgi```
 
-
+ Then you restart apache : 
+ ```$sudo apache2ctl restart```
+     
 
 
