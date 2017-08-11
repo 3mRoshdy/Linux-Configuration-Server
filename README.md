@@ -24,15 +24,17 @@ This Project Requires :
     - Start off by "sudo apt-get update" to update all packages.
     - Enter "sudo apt-get upgrade" to upgrade all updated packages (if any).
   # Through the local terminal :
-    - Generate Key Using command "ssh-keygen"
-    - Enter location for the key to be aquired.
-    - Navigate through the directory and open the new_key_file.pub
-    ```
-    The key was created in a default location /ubuntu/.ssh/<key_file>
-
-    $cat /Users/panpan/.ssh/key_file.pub
+    Generate Key Using command "ssh-keygen"
+    Enter location for the key to be aquired.
+    Navigate through the directory and open the new_key_file.pub
     
-    ```
+      ```
+      The key was created in a default location /ubuntu/.ssh/<key_file>
+
+      $cat /Users/panpan/.ssh/key_file.pub
+
+      ```
+      
     Copy the content of that file
     
   
