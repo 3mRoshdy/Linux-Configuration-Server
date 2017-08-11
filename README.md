@@ -20,10 +20,10 @@ This Project Requires :
   - define the instance to be Ubuntu
   - choose the instance plan for the server to be hosted.
   - Wait for the instance to be ready then launch 'Connect using ssh' button
-  # Through the host terminal :
+  1. Through the host terminal :
     - Start off by "sudo apt-get update" to update all packages.
     - Enter "sudo apt-get upgrade" to upgrade all updated packages (if any).
-  # Through the local terminal :
+  2. Through the local terminal :
     Generate Key Using command "ssh-keygen"
     Enter location for the key to be aquired.
     Navigate through the directory and open the new_key_file.pub
@@ -35,6 +35,20 @@ This Project Requires :
 
       ```
       
-    Copy the content of that file
+    Copy the content of that file.
+    
+    3. return to the remote terminal : 
+      "sudo vi /home/ubuntu/.ssh/authorized_keys"
+     paste the content of the key.
+     
+    4. 
+       sudo chmod 700 ~/.ssh
+       sudo chmod 644 ~/.ssh/authorized_keys
+    5. Install finger :
+      ```
+      sudo apt-get install finger
+      ```
+       
+     
     
   
